@@ -2,5 +2,5 @@
     <string name="app_name">ShortCuts</string>
     <string name="shortcuts_disabled">Disable</string>
     <string name="shortcuts_long_label">It\'s a very .. very .... label</string>
-    <string name="shortcuts_short_label">short label</string>
+    <string name="shortcuts_short_label">static shortcuts</string>
 </resources>

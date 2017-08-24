@@ -12,10 +12,14 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="cc.ifnot.shortcuts.MainActivity"
-            android:targetPackage="cc.ifnot.shortcuts" />
-        <!-- If your shortcut is associated with multiple intents, include them
-             here. The last intent in the list determines what the user sees when
-             they launch this shortcut. -->
+            android:targetPackage="cc.ifnot.shortcuts">
+            <!-- If your shortcut is associated with multiple intents, include them
+                 here. The last intent in the list determines what the user sees when
+                 they launch this shortcut. -->
+            <extra
+                android:name="cc.ifnot.shortcuts.MainActivity.LAUNCHERMODE"
+                android:value="1" />
+        </intent>
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
     <!-- Specify more shortcuts here. -->

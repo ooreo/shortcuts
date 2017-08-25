@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
                 BuildConfig.GIT_COMMIT,
                 parseDate(BuildConfig.BUILD_TIME)
         )
+
+        btn.setOnClickListener({
+            startActivity(Intent(this, MainActivity2::class.java))
+        })
     }
 
     private fun parseDate(build_time: String): String =

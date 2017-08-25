@@ -3,4 +3,9 @@
     <string name="shortcuts_disabled">Disable</string>
     <string name="shortcuts_long_label">It\'s a very .. very .... label</string>
     <string name="shortcuts_short_label">static shortcuts</string>
+    <string name="shortcuts_short_label_static">Goto Next Activity</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

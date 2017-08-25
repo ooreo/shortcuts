@@ -1,6 +1,10 @@
 package cc.ifnot.shortcuts
 
 import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
@@ -12,13 +16,32 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initView()
+        initShortCuts()
         initData(intent)
+    }
+
+    private val DYNAMICSHORTCUTSID = "dynamic_shortcuts_id"
+
+    private fun initShortCuts() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            val label = "dynamic_shortcuts"
+            val info = ShortcutInfo.Builder(this, DYNAMICSHORTCUTSID)
+                    .setLongLabel(label)
+                    .setShortLabel(label)
+                    .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
+                    .setIntent(Intent(this, MainActivity::class.java).setAction(Intent.ACTION_VIEW)
+                            .putExtra(LAUNCHERMODE, LAUNCHER_DYNAMIC_SHORTCUTS)
+                    )
+                    .build()
+
+            val shortcutManager = this.getSystemService(SHORTCUT_SERVICE) as ShortcutManager
+            shortcutManager.addDynamicShortcuts(Collections.singletonList(info))
+        }
     }
 
     private val TAG = this.javaClass.name

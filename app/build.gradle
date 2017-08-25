@@ -53,7 +53,7 @@ android {
         variant.outputs.each { output ->
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def fileName = outputFile.name.replace("app", "${defaultConfig.applicationId}_${defaultConfig.versionName}_${gitCommit}")
+                def fileName = outputFile.name.replace("app", "${variant.mergedFlavor.applicationId}_${variant.mergedFlavor.versionName}_${gitCommit}")
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }

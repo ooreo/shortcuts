@@ -29,18 +29,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun initShortCuts() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            val label = "dynamic_shortcuts"
-            val info = ShortcutInfo.Builder(this, DYNAMICSHORTCUTSID)
-                    .setLongLabel(label)
-                    .setShortLabel(label)
-                    .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
-                    .setIntent(Intent(this, MainActivity::class.java).setAction(Intent.ACTION_VIEW)
-                            .putExtra(LAUNCHERMODE, LAUNCHER_DYNAMIC_SHORTCUTS)
-                    )
-                    .build()
+            for (i in 0..4) {
 
-            val shortcutManager = this.getSystemService(SHORTCUT_SERVICE) as ShortcutManager
-            shortcutManager.addDynamicShortcuts(Collections.singletonList(info))
+                val label = "dynamic_shortcuts" + i
+                val info = ShortcutInfo.Builder(this, DYNAMICSHORTCUTSID + i)
+                        .setLongLabel(label)
+                        .setShortLabel(label)
+                        .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
+                        .setIntent(Intent(this, MainActivity::class.java).setAction(Intent.ACTION_VIEW)
+                                .putExtra(LAUNCHERMODE, LAUNCHER_DYNAMIC_SHORTCUTS)
+                        )
+                        .build()
+
+                val shortcutManager = this.getSystemService(SHORTCUT_SERVICE) as ShortcutManager
+                if (shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size < shortcutManager.maxShortcutCountPerActivity) {
+                    shortcutManager.addDynamicShortcuts(Collections.singletonList(info))
+                    Log.d(TAG, "shortcuts status!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
+                            + shortcutManager.maxShortcutCountPerActivity)
+                    Log.d(TAG, DYNAMICSHORTCUTSID + i + " shortcuts has been created")
+                } else {
+                    Log.d(TAG, "max shortcuts!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
+                            + shortcutManager.maxShortcutCountPerActivity)
+                    Log.d(TAG, DYNAMICSHORTCUTSID + i + " shortcuts has been created")
+                }
+
+            }
         }
     }
 

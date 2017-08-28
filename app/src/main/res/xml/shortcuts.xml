@@ -11,14 +11,14 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="cc.ifnot.shortcuts.MainActivity"
+            android:targetClass="cc.ifnot.shortcuts.activity.MainActivity"
             android:targetPackage="cc.ifnot.shortcuts">
             <!-- If your shortcut is associated with multiple intents, include them
                  here. The last intent in the list determines what the user sees when
                  they launch this shortcut. -->
             <extra
-                android:name="cc.ifnot.shortcuts.MainActivity.LAUNCHERMODE"
-                android:value="1" />
+                android:name="cc.ifnot.shortcuts.activity.MainActivity.LAUNCHERMODE"
+                android:value="4" />
         </intent>
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
@@ -33,14 +33,14 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="cc.ifnot.shortcuts.MainActivity2"
+            android:targetClass="cc.ifnot.shortcuts.activity.MainActivity2"
             android:targetPackage="cc.ifnot.shortcuts">
             <!-- If your shortcut is associated with multiple intents, include them
                  here. The last intent in the list determines what the user sees when
                  they launch this shortcut. -->
             <extra
-                android:name="cc.ifnot.shortcuts.MainActivity.LAUNCHERMODE"
-                android:value="1" />
+                android:name="cc.ifnot.shortcuts.activity.MainActivity.LAUNCHERMODE"
+                android:value="8" />
         </intent>
         <categories android:name="android.shortcut.conversation" />
     </shortcut>

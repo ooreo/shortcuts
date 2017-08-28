@@ -34,7 +34,7 @@ android {
             keyPassword System.getenv("ALIAS_PASS")
         }
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
@@ -80,6 +80,13 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-vector-drawable:26.+'
+
+    compile 'io.sentry:sentry-android:1.5.2'
+
+    compile 'com.google.firebase:firebase-crash:11.0.4'
+
+    compile 'com.orhanobut:logger:2.1.1'
+
     testCompile 'junit:junit:4.12'
 }
 repositories {

@@ -1,9 +1,10 @@
-package cc.ifnot.shortcuts
+package cc.ifnot.shortcuts.activity
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import cc.ifnot.shortcuts.R
 
 class MainActivity2 : AppCompatActivity() {
 

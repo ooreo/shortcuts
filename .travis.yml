@@ -3,7 +3,7 @@
 
 language: android
 jdk: oraclejdk8
-dist: precise
+#dist: precise
 sudo: required # false for Container-Based Infrastructure, required for Sudo-enabled Infrastructure
 
 android:
@@ -38,10 +38,10 @@ env:
     - ABI=x86 # ARM ABI v7a by default
     - QEMU_AUDIO_DRV=none # Disable emulator audio to avoid warning
     - GRADLE_USER_HOME="${TRAVIS_BUILD_DIR}/gradle" # Change location for Gradle Wrapper and cache
-    - ANDROID_HOME=/usr/local/android-sdk-24.0.2 # Depends on the cookbooks version used in the VM
-    - TOOLS=${ANDROID_HOME}/tools # PATH order matters, exists more than one emulator script
-    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
-    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
+    #- ANDROID_HOME=/usr/local/android-sdk-24.0.2 # Depends on the cookbooks version used in the VM
+    #- TOOLS=${ANDROID_HOME}/tools # PATH order matters, exists more than one emulator script
+    #- PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+    #- ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 #matrix:
 #  include: # More Emulator API levels to build in parallel
 #    - env:
@@ -102,16 +102,17 @@ install:
 
 before_script:
   # Wait for emulator fully-booted and disable animations
-  #- android-wait-for-emulator
-  #- adb shell settings put global window_animation_scale 0 &
-  #- adb shell settings put global transition_animation_scale 0 &
-  #- adb shell settings put global animator_duration_scale 0 &
-  #- sleep 30
-  #- adb shell input keyevent 82 &
+#  - android-wait-for-emulator
+#  - adb shell settings put global window_animation_scale 0 &
+#  - adb shell settings put global transition_animation_scale 0 &
+#  - adb shell settings put global animator_duration_scale 0 &
+#  - sleep 30
+#  - adb shell input keyevent 82 &
 
 script:
   # Run all device checks
   - cd ${TRAVIS_BUILD_DIR} && ./gradlew clean assembleDebug
+  - test ${TRAVIS_TAG} && ./gradlew assembleRelease || echo "no tags found; escaped..."
 
 after_script:
   # Show tests and lint results
@@ -120,3 +121,14 @@ after_script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
+  - cd ${TRAVIS_BUILD_DIR} && mv app/build/outputs/apk/*.apk .
+deploy:
+  provider: releases
+  api_key: ${GITHUB_API_TOKEN}
+  file_glob: true
+  file: ${TRAVIS_BUILD_DIR}/*.apk
+  skip_cleanup: true
+  on:
+    tags: true

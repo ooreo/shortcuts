@@ -3,7 +3,6 @@ package cc.ifnot.shortcuts
 import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.google.firebase.crash.FirebaseCrash
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import io.sentry.Sentry
@@ -21,7 +20,7 @@ class App : Application() {
 
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             Sentry.init().sendException(e)
-            FirebaseCrash.report(e)
+//            FirebaseCrash.report(e)
             Logger.d(t)
         }
     }

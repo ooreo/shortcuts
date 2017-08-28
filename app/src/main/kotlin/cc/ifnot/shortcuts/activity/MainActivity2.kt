@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import cc.ifnot.shortcuts.R
+import io.sentry.Sentry
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -25,6 +26,8 @@ class MainActivity2 : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
         }
+        Sentry.capture(mTextMessage!!.text.toString())
+
         false
     }
 

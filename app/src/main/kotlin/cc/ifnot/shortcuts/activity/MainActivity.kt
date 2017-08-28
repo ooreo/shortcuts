@@ -12,6 +12,7 @@ import android.widget.Toast
 import cc.ifnot.shortcuts.App
 import cc.ifnot.shortcuts.BuildConfig
 import cc.ifnot.shortcuts.R
+import io.sentry.Sentry
 //import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -119,10 +120,12 @@ class MainActivity : AppCompatActivity() {
 
         btn.setOnClickListener({
             startActivity(Intent(this, MainActivity2::class.java))
+            Sentry.capture("btn clicked!")
         })
 
         clear.setOnClickListener({
             App.prefs.edit().clear().apply()
+            Sentry.capture("btn clicked!")
             Toast.makeText(this, getString(R.string.clear_done), Toast.LENGTH_SHORT)
                     .show()
             startActivity(Intent(this, MainActivity::class.java))

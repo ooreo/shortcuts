@@ -4,8 +4,10 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.firebase.crash.FirebaseCrash
+import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import io.sentry.Sentry
+
 
 /**
  * Created by dp on 2017/8/28.
@@ -13,6 +15,10 @@ import io.sentry.Sentry
 class App : Application() {
 
     init {
+        Logger.addLogAdapter(object : AndroidLogAdapter() {
+            override fun isLoggable(priority: Int, tag: String?): Boolean = BuildConfig.DEBUG
+        })
+
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             Sentry.init().sendException(e)
             FirebaseCrash.report(e)

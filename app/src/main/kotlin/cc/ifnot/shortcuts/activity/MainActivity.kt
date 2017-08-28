@@ -12,7 +12,7 @@ import android.widget.Toast
 import cc.ifnot.shortcuts.App
 import cc.ifnot.shortcuts.BuildConfig
 import cc.ifnot.shortcuts.R
-import com.orhanobut.logger.Logger
+//import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,20 +51,20 @@ class MainActivity : AppCompatActivity() {
                 val shortcutManager = this.getSystemService(SHORTCUT_SERVICE) as ShortcutManager
                 if (shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size < shortcutManager.maxShortcutCountPerActivity) {
                     shortcutManager.addDynamicShortcuts(Collections.singletonList(info))
-                    Logger.d(TAG, "shortcuts status!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
-                            + shortcutManager.maxShortcutCountPerActivity)
-                    Logger.d(TAG, DYNAMICSHORTCUTSID + i + " shortcuts has been created")
+//                    Logger.d("shortcuts status!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
+//                            + shortcutManager.maxShortcutCountPerActivity)
+//                    Logger.d(DYNAMICSHORTCUTSID + i + " shortcuts has been created")
                 } else {
-                    Logger.d(TAG, "max shortcuts!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
-                            + shortcutManager.maxShortcutCountPerActivity)
-                    Logger.d(TAG, DYNAMICSHORTCUTSID + i + " shortcuts has been created")
+//                    Logger.d("max shortcuts!!!" + shortcutManager.dynamicShortcuts.size + shortcutManager.manifestShortcuts.size
+//                            + shortcutManager.maxShortcutCountPerActivity)
+//                    Logger.d(DYNAMICSHORTCUTSID + i + " shortcuts has been created")
                 }
 
             }
         }
     }
 
-    private val TAG = this.javaClass.name
+//    private val TAG = this.javaClass.name
 
     private val LAUNCHERMODE = "cc.ifnot.shortcuts.activity.MainActivity.LAUNCHERMODE"
 
@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity() {
     private fun initData(intent: Intent?) {
         val launcherMode = intent?.getIntExtra(LAUNCHERMODE, LAUNCHER_NORMAL)
         if (intent == null) {
-            Logger.d(TAG, "intent is null")
+//            Logger.d("intent is null")
         }
-        Logger.d(TAG, launcherMode.toString())
+//        Logger.d(launcherMode.toString())
         from.text = when (launcherMode) {
             LAUNCHER_STATIC_SHORTCUTS -> {
                 App.prefs.edit().putInt(App.MAINACTIVITY_STATIC_SHORTCUTS_OPENS, App.prefs.getInt(App.MAINACTIVITY_STATIC_SHORTCUTS_OPENS, 0) + 1)

@@ -18,9 +18,11 @@ class App : Application() {
             override fun isLoggable(priority: Int, tag: String?): Boolean = BuildConfig.DEBUG
         })
 
+        Sentry.init("https://7a93dce8ae3f4716906da9f00cc2aa2f:625ab85e075a4ea0b614d0bec815a0bd@sentry.io/209086")
+        
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
-            Sentry.init("https://7a93dce8ae3f4716906da9f00cc2aa2f:625ab85e075a4ea0b614d0bec815a0bd@sentry.io/209086").sendException(e)
 //            FirebaseCrash.report(e)
+            Sentry.capture(e)
             Logger.d(t)
         }
     }
